@@ -1,0 +1,77 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%               Beginn der Präambel                 %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                     Pakete                        %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{scrlayer-scrpage}
+\usepackage[pdftex,colorlinks=true,linkcolor=black]{hyperref}
+\usepackage[T1]{fontenc}
+\usepackage[default]{sourcesanspro}
+\usepackage{multicol}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{minibox}
+\usepackage{multicol}
+\usepackage{tikz}
+\usepackage{lastpage}
+
+\ofoot*{\normalsize \emph{\thepage\nobreakspace von\nobreakspace \pageref{LastPage}}} 
+\cfoot*{HedgeDoc e.V. $\bullet$ Pulverstraße 1 $\bullet$ 44225 Dortmund}
+
+\usepackage[pdftex,colorlinks=true,linkcolor=black]{hyperref}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%           Änderungsdaten der Ordnungen            %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\datumsatzung}{17.03.2022 }
+\newcommand{\datumbeitrago}{23.02.2022 }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%    Befehle und Definitionen der Formularfelder    %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Veränderung der Standard-Einstellungen der Formularfelder
+\renewcommand*{\DefaultOptionsofText}{%
+print,
+borderstyle=U, % S = Solid (default), B = Beveled, D = Dashed, I = Inset und U = Underlined
+bordercolor=0 0 0, % 0 0 0 = schwarz und 1 1 1 = weiß
+borderwidth=0.4pt,
+}
+
+\renewcommand*{\DefaultOptionsofCheckBox}{%
+print,
+checkboxsymbol=4,
+height=0.8\baselineskip, % dieser Wert ist eigentlich default, aber irgendwie geht das kaputt wenn man das nicht hier setzt
+borderstyle=S, % S = Solid, B = Beveled, D = Dashed, I = Inset und U = Underlined
+bordercolor=0 0 0, % 0 0 0 = schwarz und 1 1 1 = weiß
+borderwidth=0.4pt,
+}
+
+%% Veränderung der Platzierung der Beschriftung der Formularfelder
+\renewcommand{\LayoutTextField}[2]{\minibox[t]{#2 \\{\footnotesize #1}}} 
+\renewcommand{\LayoutCheckField}[2]{\minibox[t]{#2 \ #1}} 
+\renewcommand{\LayoutChoiceField}[2]{\minibox[t]{\hspace*{-1em} #2 \ #1}}
+
+%% Zähler für das Label name= der Textfelder 'tf' und CheckBoxen 'cb'
+\newcounter{tf}
+\newcounter{cb}
+
+%% Definition der eigenen Befehle zur einfachen Erstellung der Formularfelder
+\newcommand{\tfw}[2]{\TextField[name=\thetf,width=#1]{#2} \stepcounter{tf}} % 'text field with width' TextField mit Angabe der Breite 'width'
+\newcommand{\cb}[1]{\CheckBox[name=\thecb]{#1} \stepcounter{cb}} % CheckBox
+\newcommand{\cm}[2]{\ChoiceMenu[%
+radio,
+radiosymbol=\ding{108},
+print,
+height=0.8\baselineskip,
+borderstyle=S,
+bordercolor=0 0 0, % 0 0 0 = schwarz und 1 1 1 = weiß
+borderwidth=0.4pt,
+name=#1]{#2}{\quad}} % ChoiceMenu mit dem Symbol 'radio' und voreingestellter Höhe
+
+%% Achtung! Kein Formularfeld: Linie für handschriftliche Eintragungen wie z.B. Unterschriften
+\newcommand{\hwf}[2]{\minibox[t]{{\rule{#1}{0.4pt}}\\[-5pt]{\footnotesize #2}}} % 'hand-written field' - Handschriftliches Feld für z.B. Unterschriften mit Angabe der Breite

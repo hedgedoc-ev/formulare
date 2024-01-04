@@ -1,0 +1,35 @@
+name: Build PDF
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Compile LaTeX
+    steps:
+      - name: Checkout git repository
+        uses: actions/checkout@v4
+
+      - name: Compile formular beitritt
+        uses: dante-ev/latex-action@latest
+        with:
+          root_file: formular-beitritt.tex
+
+      - name: Compile formular anpassung-mitgliedsdaten
+        uses: dante-ev/latex-action@latest
+        with:
+          root_file: formular-anpassung-mitgliedsdaten.tex
+
+      - name: Compile formular aenderung-zahlungsinformationen
+        uses: dante-ev/latex-action@latest
+        with:
+          root_file: formular-aenderung-zahlungsinformationen.tex
+
+      - uses: actions/upload-artifact@master
+        with:
+          name: Formulare
+          path: "formular-*.pdf"
